@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	
+	<script type="text/javascript">
+
+	function funcD1(opCode, dataType, data){
+		document.getElementById('f1').innerHTML = "以下是Native plugin返回的值：<br><p style='color:red;'>" + data + "</p>";
+	}
+	
+	function funcD3(opCode, dataType, data){
+		document.getElementById('f3').innerHTML = "以下是用户输入的返回的值：<br>" + data;
+	}
+	
+	function onCb(info){
+		document.getElementById('f2').innerHTML = "以下是onCallBack的返回值：<br>" + info;
+	}
+
+	window.uexOnload = function(type){
+		if(type == 0){  
+			uexDemo.cbStartActivityForResult = funcD1;
+			uexDemo.cbTest_showInputDialog = funcD3;
+			uexDemo.onCallBack = onCb;
+		}
+	}
+	
+	function openv(){
+			uexBluetooth.connect();
+	}
+	
+	function send(){
+		var path = document.getElementById("path").value;
+	   var param = {
+          type:2,
+          content:"12122233",
+          filePath:path
+      };
+    	param = JSON.stringify(param);
+		uexBluetooth.send(param);
+	}
+
+	function sendText(){
+			var text = document.getElementById("textValue").value;
+	   var param = {
+          type:1,
+          content:text
+      };
+    	param = JSON.stringify(param);
+		uexBluetooth.send(param);
+	}
+
+	function setEnable(){
+		var text = document.getElementById("enable").value;
+	   var param = {
+          enable:text,
+      };
+    	param = JSON.stringify(param);
+		uexBluetooth.setEnable(param);
+	}
+	function setVisible(){
+		var text = document.getElementById("time").value;
+	   var param = {
+          time:text,
+      };
+    	param = JSON.stringify(param);
+		uexBluetooth.setVisible(param);
+	}
+</script>
+</head>
+
+<body>
+	<div class="tit">uexDemo对象</div>
+	<div class="conbor">
+		<div class="consj">
+		
+			<span>1.发送文本</span>
+			<input class="textbox" type="text" id="textValue" value="00020202020">
+			<input class="btn" type="button" value="点击调用接口" onclick="sendText();"><br>
+			
+			<span>2.发送文件</span>
+			<input class="textbox" type="text" id="path" value="/sdcard/test.png">
+			<input class="btn" type="button" value="点击调用接口" onclick="send();"><br>
+
+			<span>3.切换开关-0，关闭，1，开启</span>
+			<input class="textbox" type="text" id="enable" value="1">
+			<input class="btn" type="button" value="点击调用接口" onclick="setEnable();"><br>
+			<span>4.设置可见</span>
+			<input class="textbox" type="text" id="time" value="300">
+			<input class="btn" type="button" value="点击调用接口" onclick="setVisible();"><br>
+		</div>
+	</div>
+</body>
+</html>

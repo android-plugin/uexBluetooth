@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<uexplugins>
+	<plugin
+        className="org.zywx.wbpalmstar.widgetone.uexBluetooth.EUExBluetooth" uexName="uexBluetooth" >
+      <!--  <method name="connect" />-->
+        <method name="send" />
+        <method name="setEnable"/>
+        <method name="setVisible"/>
+    </plugin>
+</uexplugins>
